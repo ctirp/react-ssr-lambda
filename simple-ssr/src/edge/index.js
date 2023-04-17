@@ -23,7 +23,7 @@ const indexFile = `
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <div>Rendered on Edge by zy</div>
+    <div>Rendered on Edge by zy used esr</div>
   </body>
 </html>
 `;
