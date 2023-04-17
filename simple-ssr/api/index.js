@@ -21,3 +21,5 @@ exports.handler = async (event) => {
   };
   return response;
 };
+
+console.log("zy---",responseBodyMock.length,responseBodyMock[1]);
