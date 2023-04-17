@@ -47,6 +47,9 @@ This solution can only be provisioned in the us-east-1 Region as it deploys Lamb
     `cd ../cdk`
 
     `cdk deploy SSRAppStack --parameters mySiteBucketName=<your bucket name>`
+    
+    `cdk deploy SSRAppStack --parameters mySiteBucketName=zy-esr-bucket2`
+   
 
 - After successful deployment you will see output variables
 

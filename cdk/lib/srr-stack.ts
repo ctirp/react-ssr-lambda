@@ -20,7 +20,7 @@ export class SsrStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    const mySiteBucketName = new CfnParameter(this, "zy-esr-bucket", {
+    const mySiteBucketName = new CfnParameter(this, "mySiteBucketName", {
       type: "String",
       description: "The name of S3 bucket to upload react application"
     });
