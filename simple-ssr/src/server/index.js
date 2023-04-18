@@ -34,7 +34,7 @@ const handler = async function (event) {
     const app = ReactDOMServer.renderToString(<SSRApp data={result.data} />);
     const html = indexFile.replace(
       '<div id="root"></div>',
-      `<div id="root">${app}</div>`
+      `<div id="root"><span>result.data.length=${result.data.length}</span>${app}</div>`
     );
     return {
       statusCode: 200,
