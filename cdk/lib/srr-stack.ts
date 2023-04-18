@@ -46,7 +46,7 @@ export class SsrStack extends Stack {
       destinationBucket: mySiteBucket,
     });
 
-    const ssrFunction = new lambda.Function(this, "ssrHandler", {
+    const ssrFunction = new lambda.Function(this, "ssrHandler2", {
       runtime: lambda.Runtime.NODEJS_16_X,
       code: lambda.Code.fromAsset("../simple-ssr/server-build"),
       memorySize: 128,
@@ -106,7 +106,7 @@ export class SsrStack extends Stack {
             },
             behaviors: [
               {
-                pathPattern: "/ssr",
+                pathPattern: "/ssr2",
               },
             ],
           },
@@ -118,7 +118,7 @@ export class SsrStack extends Stack {
       value: `https://${distribution.distributionDomainName}`,
     });
     new CfnOutput(this, "Lambda SSR URL", {
-      value: `https://${distribution.distributionDomainName}/ssr`,
+      value: `https://${distribution.distributionDomainName}/ssr2`,
     });
     new CfnOutput(this, "Lambda@Edge SSR URL", {
       value: `https://${distribution.distributionDomainName}/edgessr`,
