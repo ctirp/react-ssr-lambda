@@ -33,11 +33,13 @@ const handler = async function (event) {
     const request = event.Records[0].cf.request;
     if (request.uri === "/edgessr") {
       const url = config.SSRApiStack.apiurl;
+      let start=new Date();
       const result = await axios.get(url);
+      let apiWaste=new Date()-start;
       const app = ReactDOMServer.renderToString(<SSRApp data={result.data} />);
       const html = indexFile.replace(
         '<div id="root"></div>',
-        `<div id="root">${app}</div>`
+        `<div id="root"><span>esr-apiWaste=${apiWaste}</span> ${app}</div>`
       );
       return {
         status: "200",

@@ -30,11 +30,13 @@ const indexFile = `
 const handler = async function (event) {
   try {
     const url = config.SSRApiStack.apiurl;
+    let start=new Date();
     const result = await axios.get(url);
+    let apiWaste=new Date()-start;
     const app = ReactDOMServer.renderToString(<SSRApp data={result.data} />);
     const html = indexFile.replace(
       '<div id="root"></div>',
-      `<div id="root"><span>result.data.length=${result.data.length}</span>${app}</div>`
+      `<div id="root"><span>ssr-apiWaste=${apiWaste}</span>${app}</div>`
     );
     return {
       statusCode: 200,
