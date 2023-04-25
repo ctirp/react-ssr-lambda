@@ -50,7 +50,8 @@ This solution can only be provisioned in the us-east-1 Region as it deploys Lamb
     
     `cdk deploy SSRAppStack --parameters mySiteBucketName=zy-esr-bucket2`
    
-
+    `还要进行一次全球化部署esr才能生效`
+    
 - After successful deployment you will see output variables
 
     **CF URL** - for React App stored on S3 and rendered on client

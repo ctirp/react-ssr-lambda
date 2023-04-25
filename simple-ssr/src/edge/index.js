@@ -31,6 +31,7 @@ const indexFile = `
 const handler = async function (event) {
   try {
     const request = event.Records[0].cf.request;
+    const response = event.Records[0].cf.response;
     if (request.uri === "/edgessr") {
       const url = config.SSRApiStack.apiurl;
       let start=new Date();
@@ -60,11 +61,24 @@ const handler = async function (event) {
         },
         body: html,
       };
+    }else if(request.uri === "/edgessr2"){
+      console.log("[zy]response=",Object.keys(response));
+      console.log("[zy]response.body=",response.body);
+      const url = config.SSRApiStack.apiurl;
+      let start=new Date();
+      const result = await axios.get(url);
+      let apiWaste=new Date()-start;
+      const app = ReactDOMServer.renderToString(<SSRApp data={result.data} />);
+      const html = indexFile.replace(
+        '<div id="root"></div>',
+        `<div id="root"><span>esr-apiWaste=${apiWaste}</span> ${app}</div>`
+      );
+      response.body=html;
     } else {
       return request;
     }
   } catch (error) {
-    console.log(`Error ${error.message}`);
+    console.log(`[zy]edge Error ${error.message}`);
     return `Error ${error}`;
   }
 };
