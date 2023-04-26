@@ -34,9 +34,10 @@ const handler = async function (event) {
     const result = await axios.get(url);
     let apiWaste=new Date()-start;
     const app = ReactDOMServer.renderToString(<SSRApp data={result.data} />);
+    let ssrWaste=new Date()-start;
     const html = indexFile.replace(
       '<div id="root"></div>',
-      `<div id="root"><span>ssr-apiWaste=${apiWaste}</span>${app}</div>`
+      `<div id="root"><span>ssr:apiWaste=${apiWaste} vs ssrWaste=${ssrWaste}</span>${app}</div>`
     );
     return {
       statusCode: 200,

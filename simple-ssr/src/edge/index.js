@@ -38,9 +38,10 @@ const handler = async function (event) {
       const result = await axios.get(url);
       let apiWaste=new Date()-start;
       const app = ReactDOMServer.renderToString(<SSRApp data={result.data} />);
+      let esrWaste=new Date()-start;
       const html = indexFile.replace(
         '<div id="root"></div>',
-        `<div id="root"><span>esr-apiWaste=${apiWaste}</span> ${app}</div>`
+        `<div id="root"><span>esr:apiWaste=${apiWaste} vs esrWaste=${esrWaste}</span> ${app}</div>`
       );
       return {
         status: "200",
@@ -69,11 +70,13 @@ const handler = async function (event) {
       const result = await axios.get(url);
       let apiWaste=new Date()-start;
       const app = ReactDOMServer.renderToString(<SSRApp data={result.data} />);
+      let esrWaste=new Date()-start;
       const html = indexFile.replace(
         '<div id="root"></div>',
-        `<div id="root"><span>esr-apiWaste=${apiWaste}</span> ${app}</div>`
+        `<div id="root"><span>esr2:apiWaste=${apiWaste} vs esrWaste=${esrWaste}</span> ${app}</div>`
       );
       response.body=html;
+      return response;
     } else {
       return request;
     }
