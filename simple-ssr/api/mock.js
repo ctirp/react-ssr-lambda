@@ -8,7 +8,7 @@ for (var i = dataLen; i--; ) {
     responseBody[i]={
         id: i, 
         name: "flight "+i, 
-        desc: "flight "+i+" description:"+Math.random(), 
+        desc: "flight "+i+" op-se-1 description:"+Math.random(), 
         price: i+".00"
     };
     
