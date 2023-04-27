@@ -7,7 +7,7 @@ import { App } from "aws-cdk-lib";
 import { ApiStack } from "../lib/api-stack";
 import { SsrStack } from "../lib/srr-stack";
 
-const demoEnv = { region: "us-east-1" };
+const demoEnv = { region: "ap-southeast-1" };
 const app = new App();
 new ApiStack(app, "SSRApiStack", { env: demoEnv });
 new SsrStack(app, "SSRAppStack", { env: demoEnv });
