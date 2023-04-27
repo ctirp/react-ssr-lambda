@@ -10,4 +10,4 @@ import { SsrStack } from "../lib/srr-stack";
 const demoEnv = { region: "ap-southeast-1" };
 const app = new App();
 new ApiStack(app, "SSRApiStack", { env: demoEnv });
-new SsrStack(app, "SSRAppStack", { env: demoEnv });
+// new SsrStack(app, "SSRAppStack", { env: demoEnv });
