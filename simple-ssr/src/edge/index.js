@@ -63,8 +63,14 @@ const handler = async function (event) {
         body: html,
       };
     }else if(request.uri === "/edgessr2"){
-      console.log("[zy]response=",Object.keys(response));
-      console.log("[zy]response.body=",response.body);
+      if(response){
+        console.log("[zy]response=",Object.keys(response));
+        console.log("[zy]response.body=",response.body);
+      }else{
+        console.log("[zy]no response=",response);
+      }
+      
+      
       const url = config.SSRApiStack.apiurl;
       let start=new Date();
       const result = await axios.get(url);
@@ -75,13 +81,34 @@ const handler = async function (event) {
         '<div id="root"></div>',
         `<div id="root"><span>esr2:apiWaste=${apiWaste} vs esrWaste=${esrWaste}</span> ${app}</div>`
       );
-      response.body=html;
-      return response;
+      // response.body=html;
+      // return response;
+      return {
+        status: "200",
+        statusDescription: "OK",
+        headers: {
+          "cache-control": [
+            {
+              key: "Cache-Control",
+              value: "max-age=100",
+            },
+          ],
+          "content-type": [
+            {
+              key: "Content-Type",
+              value: "text/html",
+            },
+          ],
+        },
+        body: html,
+      };
+      
     } else {
       return request;
     }
   } catch (error) {
     console.log(`[zy]edge Error ${error.message}`);
+    //[zy]edge Error Cannot convert undefined or null to object
     return `Error ${error}`;
   }
 };
