@@ -3,7 +3,7 @@
 let responseBodyMock=require("./mock");
 exports.handler = async (event) => {
   const responseCode = 200;
-  const responseBody = responseBodyMock||[
+  const responseBody = responseBodyMock(300)||[
     { id: 1, name: "item 1", desc: "product 1 description by zy", price: "1.00" },
     { id: 2, name: "item 2", desc: "product 2 description", price: "2.00" },
     { id: 3, name: "item 3", desc: "product 3 description", price: "3.00" },
@@ -22,4 +22,4 @@ exports.handler = async (event) => {
   return response;
 };
 
-console.log("zy---",responseBodyMock.length,responseBodyMock[0]);
+console.log("[zy]---mock.length",responseBodyMock.length,responseBodyMock[1]);
