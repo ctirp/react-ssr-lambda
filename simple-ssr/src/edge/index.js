@@ -32,7 +32,9 @@ const handler = async function (event) {
   try {
     const request = event.Records[0].cf.request;
     const response = event.Records[0].cf.response;
+    console.log("[zy]start  request.uri=",request.uri); 
     if (request.uri === "/edgessr") {
+      // console.log("[zy]start edgessr request.uri=",request.uri);
       const url = config.SSRApiStack.apiurl;
       let start=new Date();
       const result = await axios.get(url);
