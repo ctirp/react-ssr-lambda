@@ -32,6 +32,7 @@ const handler = async function (event) {
   try {
     const request = event.Records[0].cf.request;
     const response = event.Records[0].cf.response;
+    console.log("[zy]start  request.uri=",request.uri); 
     if (request.uri === "/edgessr") {
       const url = config.SSRApiStack.apiurl;
       let start=new Date();
