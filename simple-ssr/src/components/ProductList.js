@@ -2,7 +2,7 @@ import React from "react";
 import Product from "./Product";
 
 const ProductList = ({ result }) => {
-  console.log(result);
+  console.log("[zy-ap]ProductList",result);
   if (result.loading) {
     return <div>loading...</div>;
   } else {
