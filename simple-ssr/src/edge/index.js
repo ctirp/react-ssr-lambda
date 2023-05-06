@@ -27,7 +27,9 @@ const indexFile = `
   </body>
 </html>
 `;
-
+/**
+https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-event-structure.html
+*/
 const handler = async function (event) {
   try {
     const request = event.Records[0].cf.request;
