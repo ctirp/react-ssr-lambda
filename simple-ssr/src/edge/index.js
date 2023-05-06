@@ -36,7 +36,8 @@ const handler = async function (event) {
     const aws_region=process.env.AWS_REGION;
     console.log("[zy]start  request.uri=",request.uri,"aws_region=",aws_region); 
     if (request.uri === "/edgessr") {
-      console.log("[zy]process.env=",Object.keys(process.env),"request=",Object.keys(request));
+      // console.log("[zy]process.env=",Object.keys(process.env),"request=",Object.keys(request));
+      console.log("[zy]request.querystring",request.querystring,"origin=",request.origin,"clientIp=",request.clientIp);
       const url = config.SSRApiStack.apiurl;
       let start=new Date();
       const result = await axios.get(url);
