@@ -32,7 +32,8 @@ const handler = async function (event) {
   try {
     const request = event.Records[0].cf.request;
     const response = event.Records[0].cf.response;
-    console.log("[zy]start  request.uri=",request.uri,"aws_region=",process.env.aws_region); 
+    const aws_region=process.env.AWS_REGION;
+    console.log("[zy]start  request.uri=",request.uri,"aws_region=",aws_region); 
     if (request.uri === "/edgessr") {
       const url = config.SSRApiStack.apiurl;
       let start=new Date();
@@ -42,7 +43,7 @@ const handler = async function (event) {
       let esrWaste=new Date()-start;
       const html = indexFile.replace(
         '<div id="root"></div>',
-        `<div id="root"><span>aws_region=${process.env.aws_region} esr:apiWaste=${apiWaste} vs esrWaste=${esrWaste}</span> ${app}</div>`
+        `<div id="root"><span>aws_region=${aws_region} esr:apiWaste=${apiWaste} vs esrWaste=${esrWaste}</span> ${app}</div>`
       );
       return {
         status: "200",
