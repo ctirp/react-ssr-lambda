@@ -29,6 +29,8 @@ const indexFile = `
 
 const handler = async function (event) {
   try {
+    const aws_region=process.env.AWS_REGION;
+    console.log("[zy]ssr start  aws_region=",aws_region);
     const url = config.SSRApiStack.apiurl;
     let start=new Date();
     const result = await axios.get(url);
@@ -37,7 +39,7 @@ const handler = async function (event) {
     let ssrWaste=new Date()-start;
     const html = indexFile.replace(
       '<div id="root"></div>',
-      `<div id="root"><span>ssr:apiWaste=${apiWaste} vs ssrWaste=${ssrWaste}</span>${app}</div>`
+      `<div id="root"><span>aws_region=${aws_region} ssr:apiWaste=${apiWaste} vs ssrWaste=${ssrWaste}</span>${app}</div>`
     );
     return {
       statusCode: 200,

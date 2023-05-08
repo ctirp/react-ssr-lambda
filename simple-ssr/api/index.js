@@ -19,7 +19,7 @@ exports.handler = async (event) => {
     headers: headers,
     body: JSON.stringify(responseBody),
   };
+  console.log("[zy]api---mock.length",responseBody.length,responseBody[1]);
   return response;
 };
 
-console.log("[zy]---mock.length",responseBodyMock.length,responseBodyMock[1]);
