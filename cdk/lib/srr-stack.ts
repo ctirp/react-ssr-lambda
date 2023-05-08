@@ -109,7 +109,7 @@ export class SsrStack extends Stack {
             },
             behaviors: [
               {
-                pathPattern: "/ssr2",
+                pathPattern: "/ssr",
               },
             ],
           },
@@ -121,7 +121,7 @@ export class SsrStack extends Stack {
       value: `https://${distribution.distributionDomainName}`,
     });
     new CfnOutput(this, "Lambda SSR URL", {
-      value: `https://${distribution.distributionDomainName}/ssr2`,
+      value: `https://${distribution.distributionDomainName}/ssr`,
     });
     new CfnOutput(this, "Lambda@Edge SSR URL", {
       value: `https://${distribution.distributionDomainName}/edgessr`,
