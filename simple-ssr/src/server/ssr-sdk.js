@@ -33,7 +33,7 @@ const handler = async function (event) {
     const url = config.SSRApiStack.apiurl;
     let start=new Date();
     let funcName="SSRApiStack-apiHandler8027B936-1j7eqtyufY1R";
-    const result = await invoke(funcName,{zy:"zy-payolad"});
+    const result = await invoke(funcName,{zy:"zy-payolad-ssr"});
     let apiWaste=new Date()-start;
     console.log("[zy]ssr end invoke","invokeWaste=",apiWaste,"result=",Object.keys(result));
 
