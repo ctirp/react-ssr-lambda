@@ -53,6 +53,9 @@ export class SsrStack extends Stack {
       timeout: Duration.seconds(5),
       handler: "index.handler",
     });
+    //how to invoke function from lambda
+    //https://docs.aws.amazon.com/cdk/api/latest/docs/aws-lambda-readme.html#invoking-a-lambda-function
+    
 
     const ssrEdgeFunction = new lambda.Function(this, "ssrEdgeHandler", {
       runtime: lambda.Runtime.NODEJS_16_X,
