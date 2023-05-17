@@ -13,7 +13,7 @@ module.exports = function responseBodyMock(len) {
         responseBody[i] = {
             id: i,
             name: "flight " + i,
-            desc: "flight " + i + " us-east-1 description:" + Math.random(),
+            desc: "flight " + i + " us-east-1 descriptio2:" + Math.random(),
             price: i + ".00"
         };
 
