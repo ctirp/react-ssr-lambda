@@ -1,10 +1,11 @@
-
+// Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0
 
 import React from "react";
 import ReactDOMServer from "react-dom/server";
 import SSRApp from "../SSRApp";
 import config from "../config.json";
-import {invoke} from '../util/invoke';
+import axios from "axios";
 
 const indexFile = `
 <!DOCTYPE html>
@@ -32,16 +33,13 @@ const handler = async function (event) {
     console.log("[zy]ssr start  aws_region=",aws_region);
     const url = config.SSRApiStack.apiurl;
     let start=new Date();
-    let funcName="SSRApiStack-apiHandler8027B936-1j7eqtyufY1R";
-    const result = await invoke(funcName,{zy:"zy-payolad"});
+    const result = await axios.get(url);
     let apiWaste=new Date()-start;
-    console.log("[zy]ssr end invoke","invokeWaste=",apiWaste,"result=",Object.keys(result));
-
     const app = ReactDOMServer.renderToString(<SSRApp data={result.data} />);
     let ssrWaste=new Date()-start;
     const html = indexFile.replace(
       '<div id="root"></div>',
-      `<div id="root"><span>aws_region=${aws_region} ssr:invokeWaste=${apiWaste} vs ssrWaste=${ssrWaste}</span>${app}</div>`
+      `<div id="root"><span>aws_region=${aws_region} ssr:apiWaste=${apiWaste} vs ssrWaste=${ssrWaste}</span>${app}</div>`
     );
     return {
       statusCode: 200,
@@ -55,4 +53,3 @@ const handler = async function (event) {
 };
 
 export { handler };
- 
