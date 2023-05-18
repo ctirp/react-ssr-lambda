@@ -16,12 +16,12 @@ async function getList(funcName,type){
             "body": "[{\"id\":-1,\"name\":\"item 1\",\"desc\":\"product -1 us-east-1 description by zy\",\"price\":\"1.00\"},{\"id\":0,\"name\":\"flight 0\",\"desc\":\"flight 0 us-east-1 descriptio2:0.6268714529131301\",\"price\":\"0.00\"}]"
         };
          */
-        const res = await invoke2(funcName,{zy:"zy-payolad",type:type});
+        const res = await invoke(funcName,{zy:"zy-payolad",type:type});
         result.data=JSON.parse(res?.result||"{}")?.body;
         //res keys= [ 'logs', 'result' ]
-        console.log("[zy]getList2 end,","getListWaste=",new Date()-start,"result=",result);
+        console.log("[zy]getList end,","getListWaste=",new Date()-start,"result=",result);
     } catch (error) {
-        console.log("[zy]getList2 error,error=",error);
+        console.log("[zy]getList error,error=",error);
     }
     return result;
 }
@@ -41,12 +41,12 @@ async function getList2(funcName,type){
             "body": "[{\"id\":-1,\"name\":\"item 1\",\"desc\":\"product -1 us-east-1 description by zy\",\"price\":\"1.00\"},{\"id\":0,\"name\":\"flight 0\",\"desc\":\"flight 0 us-east-1 descriptio2:0.6268714529131301\",\"price\":\"0.00\"}]"
         };
          */
-        const res = await invoke(funcName,{zy:"zy-payolad",type:type});
+        const res = await invoke2(funcName,{zy:"zy-payolad",type:type});
         result.data=res?.result?.body||[];
         //res keys= [ 'logs', 'result' ]
-        console.log("[zy]getList end,","getListWaste=",new Date()-start,"res.logs=",res.logs);
+        console.log("[zy]getList2 end,","getListWaste=",new Date()-start,"res.logs=",res.logs);
     } catch (error) {
-        console.log("[zy]getList error,error=",error);
+        console.log("[zy]getList2 error,error=",error);
     }
     return result;
 }
