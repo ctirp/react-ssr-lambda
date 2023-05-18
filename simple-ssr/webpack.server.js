@@ -1,11 +1,11 @@
 const path = require("path");
 
 module.exports = {
-  entry: [
-    "./src/server/index.js",
-    "./src/server/ssr-axios.js",
-    "./src/server/ssr-sdk.js",
-  ],
+  entry: {
+    index:"./src/server/index.js",
+    ssraxios:"./src/server/ssr-axios.js",
+    ssrsdk:"./src/server/ssr-sdk.js",
+  },
 
   target: "node",
 
