@@ -19,7 +19,7 @@ async function getList(funcName,type){
         const res = await invoke(funcName,{zy:"zy-payolad",type:type});
         result.data=JSON.parse(res?.result?.body||"[]");
         //res keys= [ 'logs', 'result' ]
-        console.log("[zy]invoke end,","res.logs=",res.logs);
+        console.log("[zy]invoke end,","invokeWaste=",new Date()-start,"res.logs=",res.logs);
     } catch (error) {
         console.log("[zy]invoke error,error=",error);
     }
