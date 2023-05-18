@@ -18,6 +18,10 @@ async function getList(funcName,type){
          */
         const res = await invoke(funcName,{zy:"zy-payolad",type:type});
         result.data=JSON.parse(res?.result||"{}")?.body;
+        if(typeof result.data==="string"){
+            result.data=JSON.parse(result.data);
+        }
+        
         //res keys= [ 'logs', 'result' ]
         console.log("[zy]getList end,","getListWaste=",new Date()-start,"result=",result);
     } catch (error) {
