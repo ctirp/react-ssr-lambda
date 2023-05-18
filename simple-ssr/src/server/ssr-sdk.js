@@ -4,7 +4,7 @@ import React from "react";
 import ReactDOMServer from "react-dom/server";
 import SSRApp from "../SSRApp";
 import config from "../config.json";
-import {invoke} from '../util/invoke';
+import {getList} from '../service/getList';
 
 const indexFile = `
 <!DOCTYPE html>
@@ -33,13 +33,12 @@ const handler = async function (event) {
     const url = config.SSRApiStack.apiurl;
     let start=new Date();
     let funcName="SSRApiStack-apiHandler8027B936-1j7eqtyufY1R";
-    const result = await invoke(funcName,{zy:"zy-payolad-ssr"});
+    const result = await getList(funcName,"ssr");
     
     let apiWaste=new Date()-start;
-    console.log("[zy]ssr end invoke","invokeWaste=",apiWaste,"result=",result.result);
-    //invokeWaste= 1059 result keys= [ 'logs', 'result' ]
-    console.log("[zy]ssr end invoke,result.logs=",result.logs);
-    const app = ReactDOMServer.renderToString(<SSRApp data={result.result} />);
+    console.log("[zy]ssr end invoke","invokeWaste=",apiWaste,"result=",result);
+ 
+    const app = ReactDOMServer.renderToString(<SSRApp data={result.data} />);
     let ssrWaste=new Date()-start;
     const html = indexFile.replace(
       '<div id="root"></div>',
