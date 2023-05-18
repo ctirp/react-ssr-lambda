@@ -6,7 +6,7 @@ import ReactDOMServer from "react-dom/server";
 import SSRApp from "../SSRApp";
 import config from "../config.json";
 import axios from "axios";
-import {invoke} from '../util/invoke';
+import {getList} from '../service/getList';
 
 const indexFile = `
 <!DOCTYPE html>
@@ -80,12 +80,11 @@ const handler = async function (event) {
       const url = config.SSRApiStack.apiurl;
       let start=new Date();
       let funcName="SSRApiStack-apiHandler8027B936-1j7eqtyufY1R";
-      const result = await invoke(funcName,{zy:"zy-payolad-esr"});
+      const result = await getList(funcName,"esr2");
       let apiWaste=new Date()-start;
-      console.log("[zy]ssr end invoke,","invokeWaste=",apiWaste,"result=",Object.keys(result.result));
-      console.log("[zy]ssr end invoke,result.logs=",result.logs);
-      
-      const app = ReactDOMServer.renderToString(<SSRApp data={result.result} />);
+      console.log("[zy]ssr end invoke,","invokeWaste=",apiWaste,"result=",Object.keys(result));
+
+      const app = ReactDOMServer.renderToString(<SSRApp data={result.data} />);
       let esrWaste=new Date()-start;
       const html = indexFile.replace(
         '<div id="root"></div>',
