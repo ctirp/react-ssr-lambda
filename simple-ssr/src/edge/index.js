@@ -82,9 +82,10 @@ const handler = async function (event) {
       let funcName="SSRApiStack-apiHandler8027B936-1j7eqtyufY1R";
       const result = await invoke(funcName,{zy:"zy-payolad-esr"});
       let apiWaste=new Date()-start;
-      console.log("[zy]ssr end invoke","invokeWaste=",apiWaste,"result=",Object.keys(result));
+      console.log("[zy]ssr end invoke,","invokeWaste=",apiWaste,"result=",Object.keys(result.result));
+      console.log("[zy]ssr end invoke,result.logs=",result.logs);
       
-      const app = ReactDOMServer.renderToString(<SSRApp data={result.data} />);
+      const app = ReactDOMServer.renderToString(<SSRApp data={result.result} />);
       let esrWaste=new Date()-start;
       const html = indexFile.replace(
         '<div id="root"></div>',
