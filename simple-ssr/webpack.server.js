@@ -1,7 +1,11 @@
 const path = require("path");
 
 module.exports = {
-  entry: "./src/server/index.js",
+  entry: [
+    "./src/server/index.js",
+    "./src/server/ssr-axios.js",
+    "./src/server/ssr-sdk.js",
+  ],
 
   target: "node",
 
@@ -9,8 +13,8 @@ module.exports = {
 
   output: {
     path: path.resolve("server-build"),
-    filename: "index.js",
-    library: "index",
+    // filename: "index.js",
+    // library: "index",
     libraryTarget: "umd",
   },
 
