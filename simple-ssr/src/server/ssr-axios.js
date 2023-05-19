@@ -30,7 +30,7 @@ const indexFile = `
 const handler = async function (event) {
   try {
     const aws_region=process.env.AWS_REGION;
-    console.log("[zy]ssr start  aws_region=",aws_region);
+    console.log("[zy]ssr start  aws_region=",aws_region,"event.path=",event.path);
     const url = config.SSRApiStack.apiurl;
     let start=new Date();
     const result = await axios.get(url);
