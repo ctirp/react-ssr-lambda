@@ -1,3 +1,3 @@
-import { handler } from "./ssr-sdk";
+import { handler } from "./ssr-axios";
 
 export { handler };

@@ -46,16 +46,24 @@ export class SsrStack extends Stack {
       destinationBucket: mySiteBucket,
     });
 
-    const ssrFunction = new lambda.Function(this, "ssrHandler2", {
+    const ssrFunction = new lambda.Function(this, "ssrHandler", {
       runtime: lambda.Runtime.NODEJS_16_X,
       code: lambda.Code.fromAsset("../simple-ssr/server-build"),
       memorySize: 128,
       timeout: Duration.seconds(5),
       handler: "index.handler",
     });
+
+    const ssrFunctionInvoke = new lambda.Function(this, "ssrHandlerInvoke", {
+      runtime: lambda.Runtime.NODEJS_16_X,
+      code: lambda.Code.fromAsset("../simple-ssr/server-build/"),
+      memorySize: 128,
+      timeout: Duration.seconds(5),
+      handler: "ssrsdk.handler",
+    });
     //how to invoke function from lambda
     //https://docs.aws.amazon.com/cdk/api/latest/docs/aws-lambda-readme.html#invoking-a-lambda-function
-    
+
 
     const ssrEdgeFunction = new lambda.Function(this, "ssrEdgeHandler", {
       runtime: lambda.Runtime.NODEJS_16_X,
@@ -74,10 +82,15 @@ export class SsrStack extends Stack {
     const ssrApi = new apigw.LambdaRestApi(this, "ssrEndpoint", {
       handler: ssrFunction,
     });
+    const ssrApiInvoke = new apigw.LambdaRestApi(this, "ssrEndpointInvoke", {
+      handler: ssrFunctionInvoke,
+    });
 
     new CfnOutput(this, "SSR API URL", { value: ssrApi.url });
+    new CfnOutput(this, "SSR ssrApiInvoke URL", { value: ssrApiInvoke.url });
 
     const apiDomainName = `${ssrApi.restApiId}.execute-api.${this.region}.amazonaws.com`;
+    const apiDomainNameInvoke = `${ssrApiInvoke.restApiId}.execute-api.${this.region}.amazonaws.com`;
 
     const distribution = new cloudfront.CloudFrontWebDistribution(
       this,
@@ -113,6 +126,18 @@ export class SsrStack extends Stack {
               },
             ],
           },
+          {
+            customOriginSource: {
+              domainName: apiDomainNameInvoke,
+              originPath: "/prod",
+              originProtocolPolicy: cloudfront.OriginProtocolPolicy.HTTPS_ONLY,
+            },
+            behaviors: [
+              {
+                pathPattern: "/ssrinvoke",
+              },
+            ],
+          },
         ],
       }
     );
@@ -122,6 +147,9 @@ export class SsrStack extends Stack {
     });
     new CfnOutput(this, "Lambda SSR URL", {
       value: `https://${distribution.distributionDomainName}/ssr`,
+    });
+    new CfnOutput(this, "Lambda ssrApiInvoke URL", {
+      value: `https://${distribution.distributionDomainName}/ssrinvoke`,
     });
     new CfnOutput(this, "Lambda@Edge SSR URL", {
       value: `https://${distribution.distributionDomainName}/edgessr`,
