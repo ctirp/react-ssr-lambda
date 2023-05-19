@@ -15,7 +15,7 @@ import { createClientForDefaultRegion } from "./create-client";
       const { Payload, LogResult } = await client.send(command);
       result = Buffer.from(Payload).toString();
       logs = Buffer.from(LogResult, "base64").toString();
-      console.log("[zy]invokeCore end,","invokeCoreWaste=",new Date()-start,"str result=",result.substring(0,100));
+      console.log("[zy]invokeCore end,","invokeCoreWaste=",new Date()-start,"str result=",result.substring(0,120));
       // console.log("[zy]invoke end,","logs=",logs);
     } catch (error) {
       console.log("[zy]invokeCore error,","error=",error);
