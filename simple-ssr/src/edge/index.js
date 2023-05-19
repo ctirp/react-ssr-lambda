@@ -71,9 +71,9 @@ const handler = async function (event) {
         body: html,
       };
     }else if(request.uri === "/edgessr2"){
-      console.log("[zy]event=",Object.keys(event));
-      console.log("[zy]event.Records=",event.Records.length);
-      console.log("[zy]event.Records[0].cf=",Object.keys(event.Records[0].cf));
+      console.log("[zy]start edgessr2,event=",Object.keys(event));
+      // console.log("[zy]event.Records=",event.Records.length);
+      // console.log("[zy]event.Records[0].cf=",Object.keys(event.Records[0].cf));
       //[zy]event.Records[0].cf= [ 'config', 'request' ]
       console.log("[zy]event.Records[0].cf.config=",Object.keys(event.Records[0].cf.config));
       
