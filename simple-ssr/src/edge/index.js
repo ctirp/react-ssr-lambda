@@ -79,7 +79,16 @@ const handler = async function (event) {
       
       const url = config.SSRApiStack.apiurl;
       let start=new Date();
-      let funcName="SSRApiStack-apiHandler8027B936-1j7eqtyufY1R";
+      const funcNameMap={
+        "us-east-1":"SSRApiStack-apiHandler8027B936-1j7eqtyufY1R",
+        "us-east-2":"SSRApiStack-apiHandler8027B936-1j7eqtyufY1R",
+        "ap-southeast-1":"SSRApiStack-apiHandler8027B936-MwbDpRPGIvWW",
+        "us-northeast-1":"SSRApiStack-apiHandler8027B936-MwbDpRPGIvWW",
+        "us-northeast-2":"SSRApiStack-apiHandler8027B936-MwbDpRPGIvWW",
+        "eu-central-1":"SSRApiStackFr2-apiHandler8027B936-rOKlZn8v44sP",
+        "eu-west-2":"SSRApiStackFr2-apiHandler8027B936-rOKlZn8v44sP",
+      };
+      let funcName=funcNameMap[aws_region]||"SSRApiStack-apiHandler8027B936-1j7eqtyufY1R";
       const result = await getList(funcName,"esr2");
       let apiWaste=new Date()-start;
       console.log("[zy]ssr end invoke,","invokeWaste=",apiWaste,"result=",Object.keys(result));
