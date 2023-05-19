@@ -88,7 +88,7 @@ const handler = async function (event) {
       let esrWaste=new Date()-start;
       const html = indexFile.replace(
         '<div id="root"></div>',
-        `<div id="root"><span>esr2:invokeWaste=${apiWaste} vs esrWaste=${esrWaste}</span> ${app}</div>`
+        `<div id="root"><span>aws_region=${aws_region} esr2:invokeWaste=${apiWaste} vs esrWaste=${esrWaste}</span> ${app}</div>`
       );
       // response.body=html;
       // return response;
