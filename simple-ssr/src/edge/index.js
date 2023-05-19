@@ -70,8 +70,8 @@ const handler = async function (event) {
         },
         body: html,
       };
-    }else if(request.uri === "/edgessr2"){
-      console.log("[zy]start edgessr2,event=",Object.keys(event));
+    }else if(request.uri === "/edgessrinvoke"){
+      console.log("[zy]start edgessrinvoke,event=",Object.keys(event));
       // console.log("[zy]event.Records=",event.Records.length);
       // console.log("[zy]event.Records[0].cf=",Object.keys(event.Records[0].cf));
       //[zy]event.Records[0].cf= [ 'config', 'request' ]
@@ -89,7 +89,7 @@ const handler = async function (event) {
         "eu-west-2":"SSRApiStackFr2-apiHandler8027B936-rOKlZn8v44sP",
       };
       let funcName=funcNameMap[aws_region]||"SSRApiStack-apiHandler8027B936-1j7eqtyufY1R";
-      const result = await getList(funcName,"esr2");
+      const result = await getList(funcName,"edgessrinvoke");
       let apiWaste=new Date()-start;
       console.log("[zy]ssr end invoke,","invokeWaste=",apiWaste,"result=",Object.keys(result));
 
@@ -97,7 +97,7 @@ const handler = async function (event) {
       let esrWaste=new Date()-start;
       const html = indexFile.replace(
         '<div id="root"></div>',
-        `<div id="root"><span>aws_region=${aws_region} esr2:invokeWaste=${apiWaste} vs esrWaste=${esrWaste}</span> ${app}</div>`
+        `<div id="root"><span>aws_region=${aws_region} edgessrinvoke:invokeWaste=${apiWaste} vs esrWaste=${esrWaste}</span> ${app}</div>`
       );
       // response.body=html;
       // return response;
