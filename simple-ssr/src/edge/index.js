@@ -75,7 +75,9 @@ const handler = async function (event) {
       // console.log("[zy]event.Records=",event.Records.length);
       // console.log("[zy]event.Records[0].cf=",Object.keys(event.Records[0].cf));
       //[zy]event.Records[0].cf= [ 'config', 'request' ]
-      console.log("[zy]event.Records[0].cf.config=",Object.keys(event.Records[0].cf.config));
+      // console.log("[zy]event.Records[0].cf.config=",Object.keys(event.Records[0].cf.config));
+      let querystring=request.querystring||"";
+      console.log("[zy]request.querystring=",querystring,"origin=",request.origin); 
       
       const url = config.SSRApiStack.apiurl;
       let start=new Date();
@@ -89,6 +91,10 @@ const handler = async function (event) {
         "eu-west-2":"SSRApiStackFr2-apiHandler8027B936-rOKlZn8v44sP",
       };
       let funcName=funcNameMap[aws_region]||"SSRApiStack-apiHandler8027B936-1j7eqtyufY1R";
+      if(querystring.indexOf("map=no")>-1){
+        funcName="SSRApiStack-apiHandler8027B936-1j7eqtyufY1R";
+      }
+      
       const result = await getList(funcName,"edgessrinvoke");
       let apiWaste=new Date()-start;
       console.log("[zy]ssr end invoke,","invokeWaste=",apiWaste,"result=",Object.keys(result));
