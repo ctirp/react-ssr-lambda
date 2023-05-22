@@ -5,8 +5,10 @@ const DEFAULT_REGION = "us-east-1";
 const orDefaultRegion = defaultTo(DEFAULT_REGION);
 
 const createClientForRegion = curry(
-  (region, ClientConstructor) =>
-    new ClientConstructor({ region: orDefaultRegion(region) })
+  (region, ClientConstructor) =>{
+    console.log("[zy]createClient,region=",region);
+    return new ClientConstructor({ region: orDefaultRegion(region) }); 
+  }
 );
 
 const createClientForDefaultRegion = createClientForRegion(null);
