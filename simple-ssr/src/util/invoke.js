@@ -1,11 +1,12 @@
 import { InvokeCommand, LambdaClient, LogType } from "@aws-sdk/client-lambda";
-import { createClientForDefaultRegion } from "./create-client";
+import { createClientForDefaultRegion,createClientForRegion } from "./create-client";
 
   const invokeCore = async (funcName, payload) => {
     let start=new Date();
     let result = "",logs = ""; 
     try {
-      const client = createClientForDefaultRegion(LambdaClient);
+      const aws_region=process.env.AWS_REGION;
+      const client = createClientForRegion(aws_region,LambdaClient);
       const command = new InvokeCommand({
         FunctionName: funcName,
         Payload: JSON.stringify(payload),
