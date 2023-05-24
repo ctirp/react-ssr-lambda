@@ -91,11 +91,11 @@ const handler = async function (event) {
       let clientRegion=aws_region;
       if(!funcName){
         funcName="SSRApiStack-apiHandler8027B936-1j7eqtyufY1R";
-        clientRegion="us-east-1"; 
+        clientRegion=null; 
       }
       if(querystring.indexOf("map=no")>-1){
         funcName="SSRApiStack-apiHandler8027B936-1j7eqtyufY1R";
-        clientRegion="us-east-1";  
+        clientRegion=null;  
       }
       
       const result = await getList(funcName,{awsRegion:aws_region,clientRegion,type:"edgessrinvoke"});
