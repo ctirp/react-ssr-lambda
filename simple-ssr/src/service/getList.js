@@ -1,7 +1,7 @@
 import {invoke} from '../util/invoke';
 
 
-async function getList(funcName,type){
+async function getList(funcName,param){
     let start=new Date();
     funcName=funcName||"SSRApiStack-apiHandler8027B936-1j7eqtyufY1R";
     let result={data:[]};
@@ -16,7 +16,7 @@ async function getList(funcName,type){
             "body": "[{\"id\":-1,\"name\":\"item 1\",\"desc\":\"product -1 us-east-1 description by zy\",\"price\":\"1.00\"},{\"id\":0,\"name\":\"flight 0\",\"desc\":\"flight 0 us-east-1 descriptio2:0.6268714529131301\",\"price\":\"0.00\"}]"
         };
          */
-        const res = await invoke(funcName,{zy:"zy-payolad",type:type});
+        const res = await invoke(funcName,param);
         result.data=res||[];
         
         //res keys= [ 'logs', 'result' ]

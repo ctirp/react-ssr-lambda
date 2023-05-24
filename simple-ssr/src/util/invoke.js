@@ -5,8 +5,9 @@ import { createClientForDefaultRegion,createClientForRegion } from "./create-cli
     let start=new Date();
     let result = "",logs = ""; 
     try {
-      const aws_region=process.env.AWS_REGION;
-      const client = createClientForRegion(aws_region,LambdaClient);
+      const { awsRegion:aws_region,clientRegion}=payload;
+      
+      const client = createClientForRegion(clientRegion,LambdaClient);
       const command = new InvokeCommand({
         FunctionName: funcName,
         Payload: JSON.stringify(payload),
@@ -16,7 +17,7 @@ import { createClientForDefaultRegion,createClientForRegion } from "./create-cli
       const { Payload, LogResult } = await client.send(command);
       result = Buffer.from(Payload).toString();
       logs = Buffer.from(LogResult, "base64").toString();
-      console.log("[zy]invokeCore end,","invokeCoreWaste=",new Date()-start,"funcName=",funcName,"str result=",result.substring(0,120));
+      console.log("[zy]invokeCore end,","invokeCoreWaste=",new Date()-start,"funcName=",funcName,"clientRegion=",clientRegion,"aws_region=",aws_region,"str result=",result.substring(0,120));
       // console.log("[zy]invoke end,","logs=",logs);
     } catch (error) {
       console.log("[zy]invokeCore error,","error=",error);
@@ -25,6 +26,7 @@ import { createClientForDefaultRegion,createClientForRegion } from "./create-cli
   };
   const invoke = async (funcName, payload) => {
     let start=new Date();
+    payload=Object.assign({zy:funcName},payload);
     return invokeCore(funcName, payload).then((res)=>{
       let data;
       try {

@@ -83,19 +83,22 @@ const handler = async function (event) {
       let start=new Date();
       const funcNameMap={
         "us-east-1":"SSRApiStack-apiHandler8027B936-1j7eqtyufY1R",
-        "us-east-2":"SSRApiStack-apiHandler8027B936-1j7eqtyufY1R",
         "ap-southeast-1":"SSRApiStack-apiHandler8027B936-MwbDpRPGIvWW",
-        "us-northeast-1":"SSRApiStack-apiHandler8027B936-MwbDpRPGIvWW",
-        "us-northeast-2":"SSRApiStack-apiHandler8027B936-MwbDpRPGIvWW",
+        "us-northeast-1":"SSRApiStackTokyo-apiHandler8027B936-yiiYbKuOWxYE",
         "eu-central-1":"SSRApiStackFr2-apiHandler8027B936-rOKlZn8v44sP",
-        "eu-west-2":"SSRApiStackFr2-apiHandler8027B936-rOKlZn8v44sP",
       };
-      let funcName=funcNameMap[aws_region]||"SSRApiStack-apiHandler8027B936-1j7eqtyufY1R";
+      let funcName=funcNameMap[aws_region];
+      let clientRegion=aws_region;
+      if(!funcName){
+        funcName="SSRApiStack-apiHandler8027B936-1j7eqtyufY1R";
+        clientRegion="us-east-1"; 
+      }
       if(querystring.indexOf("map=no")>-1){
         funcName="SSRApiStack-apiHandler8027B936-1j7eqtyufY1R";
+        clientRegion="us-east-1";  
       }
       
-      const result = await getList(funcName,"edgessrinvoke");
+      const result = await getList(funcName,{awsRegion:aws_region,clientRegion,type:"edgessrinvoke"});
       let apiWaste=new Date()-start;
       console.log("[zy]ssr end invoke,","invokeWaste=",apiWaste,"result=",Object.keys(result));
 
